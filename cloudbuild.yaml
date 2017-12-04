@@ -3,5 +3,5 @@ steps:
   args: ['build', '-t', 'gcr.io/iroiro-175105/my-api:$TAG_NAME', '.']
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/iroiro-175105/my-api:$TAG_NAME']
-- name: 'gcr.io/iroiro-175105/deploy:v1'
+- name: 'gcr.io/iroiro-175105/deploy:v2'
   args: ['$TAG_NAME']
