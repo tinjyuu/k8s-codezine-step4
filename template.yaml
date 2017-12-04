@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: my-api-{tag}
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels: # labelに下記の値を設定
+        app: my-api
+        version: {tag}
+    spec:
+      containers:
+      - name: my-api
+        image: gcr.io/iroiro-175105/my-api:{tag}
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-api-{tag}
+spec:
+  type: ClusterIP
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+    name: http
+  selector:
+    app: my-api
+    version: {tag}
